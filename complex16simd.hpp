@@ -112,7 +112,7 @@ namespace Qrack {
 	//	return atan2(imag(cmplx), real(cmplx));
 	//}
 	Complex16Simd conj(const Complex16Simd& cmplx) {
-		return Complex16Simd(real(cmplx), -imag(cmplx));
+		return Complex16Simd(_mm_shuffle_pd(cmplx._val, _mm_sub_pd(_mm_set1_pd(0.0),cmplx._val), 2));
 	}
 	double norm(const Complex16Simd& cmplx) {
 		__v2df temp = (__v2df)_mm_mul_pd(cmplx._val, cmplx._val);
